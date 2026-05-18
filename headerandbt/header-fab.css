@@ -163,11 +163,12 @@
 
 .mobile-fab__btn--top {
   background-image: url(img/quickbt_top_default.png);
-  margin-top: 10px;
+  height: 0;
+  margin-top: 0;
+  overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(30px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.35s ease, height 0.35s ease, margin-top 0.35s ease;
 }
 
 .mobile-fab__btn--top::after {
@@ -179,9 +180,11 @@
 }
 
 .mobile-fab__btn--top.is-visible {
+  height: 64px;
+  margin-top: 10px;
+  overflow: visible;
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
 }
 
 
@@ -430,6 +433,7 @@
 
 @media (max-width: 768px) {
   .cb-header {
+    position: fixed;
     height: auto;
     min-height: var(--header-h);
     overflow: visible;

@@ -217,11 +217,11 @@ if (btnScrollTop) {
     e.preventDefault();
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var behavior = reduce ? 'auto' : 'smooth';
+    var el = document.querySelector('.parallax-root') || document.scrollingElement || document.documentElement;
     try {
-      window.scrollTo({ top: 0, left: 0, behavior: behavior });
+      el.scrollTo({ top: 0, left: 0, behavior: behavior });
     } catch (err) {
-      (document.scrollingElement || document.documentElement).scrollTop = 0;
-      document.body.scrollTop = 0;
+      el.scrollTop = 0;
     }
   });
 }
