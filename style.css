@@ -1,0 +1,64 @@
+/* 폰트 및 기본 세팅 */
+@import url(https://fonts.googleapis.com/css?family=Roboto:100);
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(to bottom, #d3eef9, #9abce3);
+  background-attachment: fixed;
+  line-height: 1;
+  overflow-x: hidden;
+}
+
+/* 패럴랙스 전용 스크롤 컨테이너: perspective를 body에서 분리해야
+   position:fixed 요소(헤더, FAB)가 뷰포트 기준으로 고정됨 */
+.parallax-root {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  perspective: 1px;
+  transform-style: preserve-3d;
+}
+
+.parallax-root * {
+  transform-style: preserve-3d;
+}
+
+.container {
+  position: relative;
+  padding: 10%;
+  max-width: 40em;
+  margin: auto;
+}
+
+.container > * {
+  position: absolute;
+}
+
+/* ══════════════════════════════════════════════
+   패럴랙스 레이어 클래스
+   translateZ 양수 → 가까움(빠름) / 음수 → 멀음(느림)
+   scale 보정값: 1 / (1 - translateZ)
+   사용법: <img class="layer-fg pos-right" style="top: 300px;" src="...">
+══════════════════════════════════════════════ */
+
+/* 깊이(속도) 클래스 */
+.layer-fg     { transform: translateZ(0.4px)  scale(0.6); z-index:  400; } /* 전경: 가장 빠름   */
+.layer-main   { transform: translateZ(0.1px)  scale(0.9); z-index:  100; } /* 중경: 기준        */
+.layer-bg     { transform: translateZ(-0.5px) scale(1.5); z-index: -500; } /* 배경: 느림        */
+.layer-bg-far { transform: translateZ(-1px)   scale(2);   z-index:-1000; } /* 원배경: 아주 느림  */
+
+/* 수평 위치 유틸리티 (세로 top은 요소마다 inline style로 지정) */
+.pos-left   { left: -85%; }
+.pos-center { left: 50%; transform: translateX(-50%) }
+.pos-right  { left: 15%; }
+
+h1, h2 { font-family: Roboto, sans-serif; font-weight: 100; margin: 0; }
+h1 { font-size: 5em; color: #1586D1; }
+h2 { font-size: 3em; }
